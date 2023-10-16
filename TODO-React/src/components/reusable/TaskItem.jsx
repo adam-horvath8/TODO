@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Form from "./Form";
+import EditForm from "./EditForm";
 
 export default function TaskItem({ task, allTasks, setAllTasks }) {
   const [isEditForm, setIsEditForm] = useState(false);
@@ -75,7 +75,7 @@ export default function TaskItem({ task, allTasks, setAllTasks }) {
         </div>
       </div>
       {isEditForm && (
-        <Form task={task} setAllTasks={setAllTasks} allTasks={allTasks} />
+        <EditForm task={task} setAllTasks={setAllTasks} allTasks={allTasks} />
       )}
     </>
   );
