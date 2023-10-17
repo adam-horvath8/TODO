@@ -1,4 +1,4 @@
-import TaskItem from "./TaskItem";
+import TaskItem from "../TaskItem";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Form from "./Form";

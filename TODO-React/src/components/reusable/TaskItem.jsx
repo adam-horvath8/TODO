@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import EditForm from "./EditForm";
+import EditForm from "./Inbox/EditForm";
 
 export default function TaskItem({ task, allTasks, setAllTasks }) {
   const [isEditForm, setIsEditForm] = useState(false);
@@ -34,7 +34,7 @@ export default function TaskItem({ task, allTasks, setAllTasks }) {
     }
   };
 
-  const handleDeleteTask = async (taskId) => {
+const handleDeleteTask = async (taskId) => {
     const filteredTasks = allTasks.filter((task) => task.id !== taskId);
     setAllTasks(filteredTasks);
 

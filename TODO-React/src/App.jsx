@@ -6,10 +6,11 @@ import {
 } from "react-router-dom";
 
 import Header from "./components/Layout/Header";
-import Projects from "./components/reusable/Projects";
-import Inbox from "./components/reusable/Inbox";
+import Projects from "./components/reusable/projects/Projects";
+import Inbox from "./components/reusable/Inbox/Inbox";
 import Week from "./components/reusable/Week";
 import Today from "./components/reusable/Today";
+import ProjectTasks from "./components/reusable/projects/ProjectTasks";
 
 function App() {
   const router = createBrowserRouter(
@@ -23,9 +24,10 @@ function App() {
         }
       >
         <Route index path="inbox" element={<Inbox />} />
-        <Route path="projects" element={<Projects />} />
         <Route path="today" element={<Today />} />
         <Route path="week" element={<Week />} />
+        <Route path="projects" element={<Projects />} />
+        <Route path=":id" element={<ProjectTasks />} />
       </Route>
     )
   );
