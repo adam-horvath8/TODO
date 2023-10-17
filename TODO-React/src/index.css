@@ -2,9 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base{
-    *{
-        margin: 0px;
-        box-sizing: border-box;
-    }
+@layer base {
+  * {
+    margin: 0px;
+    box-sizing: border-box;
+  }
+}
+
+@layer components {
+  .active {
+    @apply bg-indigo-100;
+  }
 }

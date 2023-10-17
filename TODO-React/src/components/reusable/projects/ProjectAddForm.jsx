@@ -15,9 +15,9 @@ const ProjectAddForm = () => {
   };
 
   return (
-    <form>
-      <input type="text" onChange={(e) => setNewProject(e.target.value)} />
-      <button onClick={handleAddProject}>Add Project</button>
+    <form className="p-2 bg-indigo-300 w-full flex justify-between gap-4">
+      <input type="text" onChange={(e) => setNewProject(e.target.value)} className="flex-[2_2_0%] p-2"/>
+      <button onClick={handleAddProject} className="bg-indigo-100 p-2">Add Project</button>
     </form>
   );
 };

@@ -27,7 +27,7 @@ const Inbox = () => {
   };
 
   return (
-    <div className="p-5 w-full md:p-10 lg:px-40">
+    <div className="p-5 w-full md:p-10 lg:px-40 flex flex-col">
       {allTasks.map((task) => (
         <TaskItem
           key={task.id}
@@ -36,7 +36,12 @@ const Inbox = () => {
           setAllTasks={setAllTasks}
         />
       ))}
-      <button onClick={() => handleAddTask()}>Add Task</button>
+      <button
+        onClick={() => handleAddTask()}
+        className="p-2 mb-2 bg-indigo-200 max-w-fit self-center"
+      >
+        Add Task
+      </button>
       {isForm && <Form />}
     </div>
   );

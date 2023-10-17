@@ -5,21 +5,21 @@ import EditForm from "./Inbox/EditForm";
 export default function TaskItem({ task, allTasks, setAllTasks }) {
   const [isEditForm, setIsEditForm] = useState(false);
 
-  const handleCompletedChange = async (taskId) => {
-    const selectedTask = allTasks.find((task) => task.id === taskId);
+  console.log(task);
 
-    if (!selectedTask) {
+  const handleCompletedChange = async (taskId) => {
+    if (!task) {
       console.error("Task not found");
     }
 
-    const newTask = allTasks.map((task) => {
-      if (task.id === taskId) {
+    const newTask = allTasks.map((t) => {
+      if (t.id === taskId) {
         return {
-          ...task,
-          is_completed: !selectedTask.is_completed,
+          ...t,
+          is_completed: !task.is_completed,
         };
       } else {
-        return task;
+        return t;
       }
     });
 
@@ -27,14 +27,14 @@ export default function TaskItem({ task, allTasks, setAllTasks }) {
 
     try {
       await axios.put(`http://localhost:8000/tasks/${taskId}`, {
-        is_completed: !selectedTask.is_completed,
+        is_completed: !task.is_completed,
       });
     } catch (err) {
       console.error(err);
     }
   };
 
-const handleDeleteTask = async (taskId) => {
+  const handleDeleteTask = async (taskId) => {
     const filteredTasks = allTasks.filter((task) => task.id !== taskId);
     setAllTasks(filteredTasks);
 
@@ -49,7 +49,7 @@ const handleDeleteTask = async (taskId) => {
     <>
       <div
         key={task.id}
-        className="flex justify-between min-w-max mb-2 p-2 bg-indigo-200"
+        className="flex justify-between min-w-max mb-2 p-2 bg-indigo-300"
       >
         <span className="p-1">{task.title}</span>
         <div className="flex justify-end gap-2">
@@ -74,9 +74,7 @@ const handleDeleteTask = async (taskId) => {
           </button>
         </div>
       </div>
-      {isEditForm && (
-        <EditForm task={task} setAllTasks={setAllTasks} allTasks={allTasks} />
-      )}
+      {isEditForm && <EditForm task={task} />}
     </>
   );
 }

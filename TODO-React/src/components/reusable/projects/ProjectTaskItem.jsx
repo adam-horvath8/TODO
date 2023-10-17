@@ -1,11 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import EditForm from "../Inbox/EditForm";
 
-const ProjectTaskItem = ({task, pTasks, sePTasks}) => {
+const ProjectTaskItem = ({ task, pTasks, setPTasks }) => {
+  const [isEditForm, setIsEditForm] = useState(false);
+
+  const handleCompletedChange = async (taskId) => {
+    if (!task) {
+      console.error("Task not found");
+    }
+
+    const newTask = pTasks.map((t) => {
+      if (t.id === taskId) {
+        return {
+          ...t,
+          is_completed: !task.is_completed,
+        };
+      } else {
+        return t;
+      }
+    });
+
+    setPTasks(newTask);
+
+    try {
+      await axios.put(`http://localhost:8000/tasks/${taskId}`, {
+        is_completed: !task.is_completed,
+      });
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const handleDeleteTask = async (taskId) => {
+    const filteredTasks = pTasks.filter((task) => task.id !== taskId);
+    setPTasks(filteredTasks);
+
+    try {
+      await axios.post(`http://localhost:8000/tasks/${taskId}`);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <>
       <div
         key={task.id}
-        className="flex justify-between min-w-max mb-2 p-2 bg-indigo-200"
+        className="flex justify-between w-full mb-2 p-2 bg-indigo-300"
       >
         <span className="p-1">{task.title}</span>
         <div className="flex justify-end gap-2">
@@ -30,9 +72,7 @@ const ProjectTaskItem = ({task, pTasks, sePTasks}) => {
           </button>
         </div>
       </div>
-      {isEditForm && (
-        <EditForm task={task} setAllTasks={setAllTasks} allTasks={allTasks} />
-      )}
+      {isEditForm && <EditForm task={task} />}
     </>
   );
 };
